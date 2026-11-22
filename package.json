@@ -1,0 +1,19 @@
+{
+  "name": "heartiq-dating-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Privacy-safe dating compatibility demo with simulated profiles, local matches, and optional open models.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "wrangler pages dev . --port 8792",
+    "bridge": "node bridge/ollama-bridge.js",
+    "test": "node --test tests/*.test.js",
+    "deploy": "wrangler pages deploy . --project-name heartiq --branch main"
+  },
+  "devDependencies": {
+    "wrangler": "4.166.0"
+  }
+}

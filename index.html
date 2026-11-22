@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Krishna Prakash Ojha (Leon) — OmegaAPI">
+  <meta name="description" content="HeartIQ is a privacy-safe dating compatibility demo with simulated profiles, local-only choices, transparent scoring, and optional open or BYOK models.">
+  <meta name="theme-color" content="#070b14">
+  <title>HeartIQ — Privacy-safe dating compatibility demo by OmegaAPI</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script type="module" src="/assets/app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="HeartIQ home">
+      <span class="brand-mark">HI</span>
+      <span class="brand-name">HeartIQ<small>by OmegaAPI</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#discover">Discover</a>
+      <a href="#matches">Matches</a>
+      <a href="#studio">Models</a>
+      <a href="#full">Full build</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="header-cta" href="#full">♥ Sponsor</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Free demo · Local-only choices · No sign-up</span>
+        <h1>Meet with <span>clarity</span>, not noise.</h1>
+        <p class="lead">HeartIQ shows how compatibility can be explainable and calm. Tune your values, see why a profile scores the way it does, save likes in your browser, and generate gentle opening lines with rules, a local open model, or your own cloud key.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#discover">Explore profiles</a>
+          <a class="button ghost" href="#full">See full build</a>
+        </div>
+        <ul class="hero-points">
+          <li>12 simulated profiles</li>
+          <li>No real photos or location</li>
+          <li>Free self-host on Cloudflare</li>
+        </ul>
+      </div>
+      <div class="hero-card" aria-label="Preview of compatibility scoring">
+        <div class="mini-top">
+          <span><i class="dot green"></i> demo match</span>
+          <span class="mini-tag">98%</span>
+        </div>
+        <div class="mini-profile">
+          <div class="avatar g1">🌸</div>
+          <div><strong>Aanya, 27</strong><small>Pune · 12 km in demo</small></div>
+          <span class="score-pill score-high">98%</span>
+        </div>
+        <div class="mini-bars">
+          <div><span>Values</span><i class="w90"></i></div>
+          <div><span>Interests</span><i class="w75"></i></div>
+          <div><span>Intent</span><i class="w60"></i></div>
+        </div>
+        <div class="mini-note">Shares 3 core values. Looking for the same kind of connection. Communication style matches your preference.</div>
+        <div class="mini-foot"><span>Rules engine · offline</span><span>No data leaves browser ✓</span></div>
+      </div>
+    </section>
+
+    <section class="strip" aria-label="Product highlights">
+      <div><strong>Explainable scoring</strong><span>See the reason behind every percentage</span></div>
+      <div><strong>Local choices</strong><span>Likes and passes never leave your browser</span></div>
+      <div><strong>Safety first</strong><span>Simulated people, no photos, no tracking</span></div>
+      <div><strong>Model neutral</strong><span>Rules, Ollama, or your own HTTPS key</span></div>
+    </section>
+
+    <section id="discover" class="section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">01 · Compatibility lab</span>
+          <h2>Set your preferences. See the reasoning.</h2>
+        </div>
+        <p>Every score is calculated from shared values, interests, intent, communication style, distance, and visible green flags. Change a checkbox and the ranking updates instantly.</p>
+      </div>
+
+      <form id="preferences-form" class="panel prefs">
+        <div class="pref-group">
+          <label>Core values</label>
+          <div class="chip-grid">
+            <label class="chip"><input type="checkbox" name="values" value="family">family</label>
+            <label class="chip"><input type="checkbox" name="values" value="calm">calm</label>
+            <label class="chip"><input type="checkbox" name="values" value="growth">growth</label>
+            <label class="chip"><input type="checkbox" name="values" value="creativity">creativity</label>
+            <label class="chip"><input type="checkbox" name="values" value="adventure">adventure</label>
+            <label class="chip"><input type="checkbox" name="values" value="ambition">ambition</label>
+          </div>
+        </div>
+        <div class="pref-group">
+          <label>Interests</label>
+          <div class="chip-grid">
+            <label class="chip"><input type="checkbox" name="interests" value="music">music</label>
+            <label class="chip"><input type="checkbox" name="interests" value="coffee">coffee</label>
+            <label class="chip"><input type="checkbox" name="interests" value="books">books</label>
+            <label class="chip"><input type="checkbox" name="interests" value="travel">travel</label>
+            <label class="chip"><input type="checkbox" name="interests" value="fitness">fitness</label>
+            <label class="chip"><input type="checkbox" name="interests" value="cooking">cooking</label>
+          </div>
+        </div>
+        <div class="field-row">
+          <label>Looking for
+            <select id="pref-intent">
+              <option value="long-term">Long-term</option>
+              <option value="meaningful">Meaningful connection</option>
+              <option value="exploring">Exploring</option>
+            </select>
+          </label>
+          <label>Communication style
+            <select id="pref-style">
+              <option value="gentle">Gentle</option>
+              <option value="direct">Direct</option>
+              <option value="playful">Playful</option>
+            </select>
+          </label>
+          <div class="range-row">
+            <label for="pref-distance">Maximum demo distance</label>
+            <input id="pref-distance" type="range" min="10" max="80" step="5" value="60">
+            <output id="pref-distance-output" for="pref-distance">60 km</output>
+          </div>
+        </div>
+        <p class="fine-print">Distance is illustrative for the demo. The app never asks for, reads, or stores your real location.</p>
+      </form>
+
+      <div id="ranking" class="profile-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="matches" class="section soft">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">02 · Swipe deck</span>
+          <h2>Like slowly. Match only when it is mutual.</h2>
+        </div>
+        <p>This is a simulation. Some profiles are marked as interested in you so you can see mutual matches and starter lines. Nothing is sent to a server, and no real person sees your choices.</p>
+      </div>
+      <div class="deck-layout">
+        <div>
+          <div id="deck" class="deck" aria-live="polite"></div>
+          <p id="deck-status" class="status"></p>
+        </div>
+        <aside class="panel match-panel">
+          <div class="studio-head">
+            <div class="studio-icon">♥</div>
+            <div><h3>Your demo matches</h3><p>Stored as profile IDs in this browser only.</p></div>
+          </div>
+          <div id="match-list" class="match-list"></div>
+          <button class="button small ghost clear-button" type="button" id="clear-demo">Clear demo data</button>
+          <p class="fine-print">No email, phone, name, photo, or IP address is written to storage.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="studio" class="section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">03 · Model studio</span>
+          <h2>Three ways to write a first hello.</h2>
+        </div>
+        <p id="model-context" class="status">Active demo profile: Aanya · compatibility 98%</p>
+      </div>
+
+      <div class="studio-grid">
+        <article class="panel studio-card">
+          <div class="studio-head"><div class="studio-icon">✓</div><h3>Rules engine</h3></div>
+          <p>Default and offline. Lines come from the selected profile's redacted prompt, shared values, and interests.</p>
+          <div id="rule-lines" class="output-box"></div>
+          <p class="fine-print">No model, no key, no network request.</p>
+        </article>
+
+        <article class="panel studio-card">
+          <div class="studio-head"><div class="studio-icon">⌘</div><h3>Local open model</h3></div>
+          <p>Run Ollama on your machine and start the included loopback bridge. Only a redacted profile prompt is forwarded.</p>
+          <button class="button primary" type="button" id="local-generate">Generate with local model</button>
+          <div id="local-lines" class="output-box">Bridge not contacted yet.</div>
+          <p class="fine-print">The bridge binds to 127.0.0.1 only and stores nothing.</p>
+        </article>
+
+        <article class="panel studio-card">
+          <div class="studio-head"><div class="studio-icon">☁</div><h3>Cloud model · BYOK</h3></div>
+          <p>Use any public HTTPS OpenAI-compatible endpoint with your own key. The key is used for one request and never stored.</p>
+          <form id="cloud-form" class="studio-card">
+            <label class="field">Endpoint<input id="cloud-endpoint" type="url" placeholder="https://api.example.com/v1" required></label>
+            <label class="field">Model<input id="cloud-model" type="text" placeholder="your-model-name" required></label>
+            <label class="field">Your API key<input id="cloud-key" type="password" autocomplete="off" placeholder="used once, never saved" required></label>
+            <button class="button primary" type="submit">Generate with my key</button>
+          </form>
+          <div id="cloud-lines" class="output-box">No cloud request made yet.</div>
+        </article>
+      </div>
+      <p id="model-status" class="status">Choose a mode above. HeartIQ never ships an API key.</p>
+    </section>
+
+    <section id="full" class="section soft">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">04 · Full build</span>
+          <h2>The public demo is free. The full build is sponsor-only.</h2>
+        </div>
+        <p>Anyone can run this demo for ₹0. Sponsors can request private access to the production-shaped build with accounts, a database, moderation, and deployment notes.</p>
+      </div>
+      <div class="unlock-grid">
+        <article class="locked-card">
+          <div class="lock-icon">🔒</div>
+          <h3>HeartIQ Full</h3>
+          <p>Private repository access is granted manually after sponsorship. No card, checkout, or payment code exists in either app.</p>
+          <ul class="unlock-list">
+            <li>Real accounts with signed sessions</li>
+            <li>Cloudflare D1 profiles, likes, and matches</li>
+            <li>Report queue and admin moderation</li>
+            <li>Retention and data-handling notes</li>
+            <li>Full deployment and backup runbook</li>
+          </ul>
+          <a class="button sponsor wide" href="https://github.com/sponsors/omegaapi-india" target="_blank" rel="noreferrer">Sponsor OmegaAPI</a>
+          <p class="sponsor-note">Goal: <strong>10 monthly sponsors</strong> · tiers from <strong>$5 to $250</strong>. <a href="https://github.com/sponsors/omegaapi-india?interval=monthly" target="_blank" rel="noreferrer">View tiers</a></p>
+          <p class="fine-print">After sponsoring, email <a href="mailto:info@omegaapi.com">info@omegaapi.com</a> or message <a href="https://t.me/Omegaapiofficial" target="_blank" rel="noreferrer">the OmegaAPI channel</a> with your GitHub username for manual access.</p>
+        </article>
+
+        <article class="panel">
+          <h3>What changes in the full build</h3>
+          <table class="compare-table">
+            <thead><tr><th>Area</th><th>Public demo</th><th>Full build</th></tr></thead>
+            <tbody>
+              <tr><td>Profiles</td><td>12 simulated</td><td>User-owned profiles</td></tr>
+              <tr><td>Choices</td><td>Browser localStorage</td><td>D1 with signed sessions</td></tr>
+              <tr><td>Matches</td><td>Simulated mutual flag</td><td>Real mutual consent</td></tr>
+              <tr><td>Safety</td><td>Static guidance</td><td>Reports and moderation queue</td></tr>
+              <tr><td>Models</td><td>Rules, local, BYOK</td><td>Same adapters plus audit notes</td></tr>
+            </tbody>
+          </table>
+          <p class="fine-print">The full build is still a demo template. It is not financial, medical, or legal advice, and it must not be used to collect real sensitive data without your own review.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="about-grid">
+        <div>
+          <span class="eyebrow">About the project</span>
+          <h2>Built to be forked, studied, and improved.</h2>
+          <p>HeartIQ is an open-source demo by Krishna Prakash Ojha (Leon) at OmegaAPI. It runs on Cloudflare Pages with a signed three-day preview lock, a strict content security policy, and no payment layer.</p>
+          <div class="about-links">
+            <a class="button sponsor" href="https://github.com/sponsors/omegaapi-india" target="_blank" rel="noreferrer">♥ Sponsor on GitHub</a>
+            <a class="button primary" href="https://github.com/omegaapi-india/heartiq-dating-demo" target="_blank" rel="noreferrer">View source</a>
+            <a class="button ghost" href="mailto:info@omegaapi.com">Email OmegaAPI</a>
+            <a class="button ghost" href="https://t.me/Omegaapiofficial" target="_blank" rel="noreferrer">Telegram</a>
+          </div>
+          <p class="sponsor-note">Goal: <strong>10 monthly sponsors</strong> · tiers from <strong>$5 to $250</strong>. <a href="https://github.com/sponsors/omegaapi-india?interval=monthly" target="_blank" rel="noreferrer">View tiers</a></p>
+        </div>
+        <aside class="panel about-card">
+          <h3>Support this project</h3>
+          <p>Sponsorship keeps the live demo online and funds more free builds. A star or a share helps too.</p>
+          <ul>
+            <li>Official GitHub Sponsors button</li>
+            <li>Monthly tiers from $5 to $250</li>
+            <li>Private full build by manual email access</li>
+            <li>No ads, trackers, or paid data services</li>
+          </ul>
+          <p class="fine-print">Contact is limited to info@omegaapi.com and the OmegaAPI Telegram channel.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© 2026 Krishna Prakash Ojha (Leon) · OmegaAPI · omegaapi.com</span>
+      <span>HeartIQ demo · simulated people · local choices · no real dating service</span>
+    </div>
+  </footer>
+</body>
+</html>
